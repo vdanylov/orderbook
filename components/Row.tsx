@@ -6,27 +6,34 @@ import {
   StyleProp,
   ViewStyle,
   ColorValue,
+  TextStyle,
 } from 'react-native'
 import Layout from '../constants/Layout'
 
 interface Props {
-  first?: string
-  second?: string
-  third?: string
-  isBold?: boolean
   containerStyle?: StyleProp<ViewStyle>
   fillBackgroundColor?: ColorValue
   fillWidth?: number
+  first?: string
+  firstStyle?: StyleProp<TextStyle>
+  second?: string
+  secondStyle?: StyleProp<TextStyle>
+  textStyle?: StyleProp<TextStyle>
+  third?: string
+  thirdStyle?: StyleProp<TextStyle>
 }
 
 export const Row = ({
-  first,
-  second,
-  third,
-  isBold,
   containerStyle,
-  fillWidth,
   fillBackgroundColor,
+  fillWidth,
+  first,
+  firstStyle,
+  second,
+  secondStyle,
+  textStyle,
+  third,
+  thirdStyle,
 }: Props) => {
   return (
     <View style={[styles.container, containerStyle]}>
@@ -42,26 +49,23 @@ export const Row = ({
           testID='fill'
         />
       )}
-      {!!first && (
-        <Text style={[styles.text, isBold && styles.bold]}>{first}</Text>
+      {first !== undefined && (
+        <Text style={[styles.text, textStyle, firstStyle]}>{first}</Text>
       )}
-      {!!second && (
-        <Text style={[styles.text, isBold && styles.bold]}>{second}</Text>
+      {second !== undefined && (
+        <Text style={[styles.text, textStyle, secondStyle]}>{second}</Text>
       )}
-      {!!third && (
-        <Text style={[styles.text, isBold && styles.bold]}>{third}</Text>
+      {third !== undefined && (
+        <Text style={[styles.text, textStyle, thirdStyle]}>{third}</Text>
       )}
     </View>
   )
 }
 
-const MAX_ROW_HEIGHT = Layout.isSmallDevice ? 30 : 40
+export const MAX_ROW_HEIGHT = Layout.isSmallDevice ? 30 : 40
 console.log(`MAX_ROW_HEIGHT`, MAX_ROW_HEIGHT)
 
 const styles = StyleSheet.create({
-  bold: {
-    fontWeight: 'bold',
-  },
   container: {
     alignItems: 'center',
     flex: 1,
