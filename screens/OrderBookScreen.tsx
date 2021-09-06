@@ -280,7 +280,9 @@ const OrderBookScreen = () => {
             list={calculatedAsks}
           />
           <Row
-            first={`Spread: ${spread} ${spreadPercentage}`}
+            first={`Spread: ${formatToLocaleString(
+              spread
+            )} ${spreadPercentage}`}
             textStyle={styles.tableHeader}
           />
           <MemoOrderList
