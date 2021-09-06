@@ -15,6 +15,7 @@ interface Props {
 export const Button = ({ containerStyle, onPress, text }: Props) => {
   return (
     <TouchableOpacity
+      testID='button'
       style={[styles.container, containerStyle]}
       onPress={onPress}
     >

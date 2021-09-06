@@ -1,19 +1,18 @@
 import React from 'react'
-import { ColorValue } from 'react-native'
-import { OrderDataItem } from '../types'
+import { StyleSheet, View, ColorValue } from 'react-native'
+import { TotalOrderDataItem } from '../types'
 import { formatToLocaleString } from '../utils'
 import { Row } from './Row'
 
-interface Props {
+export interface Props {
   absoluteTotal: number
-  list: OrderDataItem[]
+  list: TotalOrderDataItem[]
   fillBackgroundColor?: ColorValue
 }
 
 const OrderList = ({ absoluteTotal, fillBackgroundColor, list }: Props) => {
-  // NOTE: sort list here
   return (
-    <>
+    <View testID='order_list' style={styles.container}>
       {list?.map(({ price, size, total }) => (
         <Row
           key={price}
@@ -21,11 +20,17 @@ const OrderList = ({ absoluteTotal, fillBackgroundColor, list }: Props) => {
           second={formatToLocaleString(size)}
           third={formatToLocaleString(total)}
           fillBackgroundColor={fillBackgroundColor}
-          fillWidth={absoluteTotal / total}
+          fillWidth={`${Math.round((total / absoluteTotal) * 100)}%`}
         />
       ))}
-    </>
+    </View>
   )
 }
 
 export const MemoOrderList = React.memo(OrderList)
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+})

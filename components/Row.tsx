@@ -13,7 +13,7 @@ import Layout from '../constants/Layout'
 interface Props {
   containerStyle?: StyleProp<ViewStyle>
   fillBackgroundColor?: ColorValue
-  fillWidth?: number
+  fillWidth?: ViewStyle['width']
   first?: string
   firstStyle?: StyleProp<TextStyle>
   second?: string
@@ -36,14 +36,14 @@ export const Row = ({
   thirdStyle,
 }: Props) => {
   return (
-    <View style={[styles.container, containerStyle]}>
+    <View testID='container' style={[styles.container, containerStyle]}>
       {!!fillWidth && (
         <View
           style={[
             StyleSheet.absoluteFillObject,
             {
               backgroundColor: fillBackgroundColor,
-              width: fillWidth,
+              width: fillWidth ?? 0,
             },
           ]}
           testID='fill'
@@ -63,7 +63,6 @@ export const Row = ({
 }
 
 export const MAX_ROW_HEIGHT = Layout.isSmallDevice ? 30 : 40
-console.log(`MAX_ROW_HEIGHT`, MAX_ROW_HEIGHT)
 
 const styles = StyleSheet.create({
   container: {

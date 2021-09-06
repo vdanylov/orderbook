@@ -40,5 +40,12 @@ export type ProductID = 'PI_XBTUSD' | 'PI_ETHUSD'
 export interface OrderDataItem {
   price: number
   size: number
+}
+export interface TotalOrderDataItem extends OrderDataItem {
   total: number
+}
+
+export interface WebSocketStatus {
+  status: 'default' | 'error' | 'loading' | 'offline' | 'online'
+  message?: string
 }
